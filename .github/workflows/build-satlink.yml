@@ -37,6 +37,14 @@ jobs:
           mkdir -p "$bundle"
           go -C satlink build -mod=readonly -trimpath -o "$bundle/satlink" .
           cp examples/transparent-sn.json examples/ns3-tdcho-ue0.json "$bundle/"
+          mkdir -p "$bundle/licenses"
+          cp docs/sources/free-ran-ue-LICENSE "$bundle/licenses/"
+          cp "$(go env GOROOT)/LICENSE" "$bundle/licenses/Go-LICENSE"
+          go -C satlink list -m -f '{{if not .Main}}{{.Path}} {{.Dir}}{{end}}' all |
+            while read -r module dir; do
+              mkdir -p "$bundle/licenses/$module"
+              cp "$dir/LICENSE" "$bundle/licenses/$module/"
+            done
           for trace in "$bundle"/*.json; do
             "$bundle/satlink" -check -trace "$trace" > /dev/null
           done

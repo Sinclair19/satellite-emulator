@@ -10,7 +10,7 @@ N3IWF traffic including IKE, ESP and UDP-encapsulated ESP.
 Open a successful **Build satlink** run for the commit you want. Under
 **Artifacts**, download the ZIP matching the simulator node’s `uname -m`:
 `satlink-linux-amd64` for `x86_64` or `satlink-linux-arm64` for `aarch64`.
-Each ZIP contains the static Linux executable and both example traces.
+Each ZIP contains the static Linux executable, both example traces, and license files.
 GitHub Actions builds them on each push to `master`, and **Run workflow** starts
 a fresh build on demand. [Build satlink runs](https://github.com/Sinclair19/satellite-emulator/actions/workflows/build-satlink.yml)
 
