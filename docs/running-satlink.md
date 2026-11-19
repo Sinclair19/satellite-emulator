@@ -5,6 +5,29 @@ It programs a netem egress queue on each data interface. The kernel forwards
 the packets. The same binary handles freeRANUE access UDP, ordinary IP, and
 N3IWF traffic including IKE, ESP and UDP-encapsulated ESP.
 
+## Download a Linux binary
+
+Open a successful **Build satlink** run for the commit you want. Under
+**Artifacts**, download the ZIP matching the simulator node’s `uname -m`:
+`satlink-linux-amd64` for `x86_64` or `satlink-linux-arm64` for `aarch64`.
+Each ZIP contains the static Linux executable and both example traces.
+GitHub Actions builds them on each push to `master`, and **Run workflow** starts
+a fresh build on demand. [Build satlink runs](https://github.com/Sinclair19/satellite-emulator/actions/workflows/build-satlink.yml)
+
+On the target node, extract the downloaded artifact and restore the executable
+bit. For example, for an x86-64 node:
+
+```sh
+unzip satlink-linux-amd64.zip -d satlink-run
+cd satlink-run
+chmod +x satlink
+./satlink -check -trace ns3-tdcho-ue0.json
+```
+
+From this directory, use `./satlink` and the bundled trace filenames in replay
+commands. The `bin/satlink` and `examples/...` paths below apply when running
+from a source checkout.
+
 ## Build and check a timeline
 
 Run these commands from the repository root on Linux with Go 1.23 or newer.

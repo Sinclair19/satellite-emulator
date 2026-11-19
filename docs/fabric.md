@@ -48,10 +48,13 @@ examples below assume the notebook printed `ens7` for the terminal side and
 
 ## Install and connect the bridge
 
-From the simulator repository on your workstation, use Go 1.23 or newer to
-build for the VM's Linux architecture. Copy the binary and trace over your
-existing FABRIC SSH connection. Here `amd64` is the target architecture and `fabric-sat` is an
-example SSH alias. The VM only needs the binary, trace, iproute2, and kernel
+For a precompiled controller, copy the matching Actions ZIP to the simulator
+VM and extract it under `~/satlink-run`. Run `chmod +x ~/satlink-run/satlink`,
+then continue with the NIC setup below. [Download a Linux binary](running-satlink.md#download-a-linux-binary)
+
+To build from source instead, use Go 1.23 or newer on your workstation and
+copy the binary and trace over SSH. Here `amd64` is the target architecture
+and `fabric-sat` is an example SSH alias. The VM only needs the binary, trace, iproute2, and kernel
 support for bridge and netem.
 
 ```sh

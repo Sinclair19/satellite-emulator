@@ -1,0 +1,47 @@
+name: Build satlink
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Linux ${{ matrix.arch }}
+    strategy:
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7
+        with:
+          go-version: stable
+          cache-dependency-path: satlink/go.sum
+      - name: Test controller
+        run: go -C satlink test -race ./...
+      - name: Build binary and check bundled traces
+        env:
+          CGO_ENABLED: '0'
+        run: |
+          bundle="$RUNNER_TEMP/satlink-bundle"
+          mkdir -p "$bundle"
+          go -C satlink build -mod=readonly -trimpath -o "$bundle/satlink" .
+          cp examples/transparent-sn.json examples/ns3-tdcho-ue0.json "$bundle/"
+          for trace in "$bundle"/*.json; do
+            "$bundle/satlink" -check -trace "$trace" > /dev/null
+          done
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: satlink-linux-${{ matrix.arch }}
+          path: ${{ runner.temp }}/satlink-bundle/
+          if-no-files-found: error
