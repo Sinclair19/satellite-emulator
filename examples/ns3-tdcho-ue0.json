@@ -1,0 +1,137 @@
+[
+  {
+    "time": 0.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.789284785810055,
+    "pdr": 1.0,
+    "link_available": true,
+    "metadata": {
+      "run": "result/tdcho",
+      "ue": "0",
+      "origin_s": 0,
+      "feeder_km": 600.0,
+      "pdr_override": null,
+      "fallback_gap_ms": null,
+      "packet_bytes": 1250,
+      "sources": [
+        {
+          "file": "sgp4-multi-snr-log.csv",
+          "sha256": "af4def0dff93c3962f470065da5594bb42fa9e27db9bf108577a567f23ae8998"
+        },
+        {
+          "file": "sgp4-handover-log.csv",
+          "sha256": "4c68c93fdb312e7faa4eb0590155fc54798b344ecedb6c54589ce862d023a549"
+        },
+        {
+          "file": "cho-detailed-log.csv",
+          "sha256": "b573463f58ae30bd71fae11d2bfb4cdd3e9eb4bfb3a1c21c268f07277e2a73ae"
+        }
+      ]
+    }
+  },
+  {
+    "time": 1.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.7845148192487215,
+    "pdr": 0.0,
+    "link_available": true
+  },
+  {
+    "time": 2.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.7800684098597297,
+    "pdr": 0.0,
+    "link_available": true
+  },
+  {
+    "time": 3.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.775948893284033,
+    "pdr": 0.0,
+    "link_available": true
+  },
+  {
+    "time": 4.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.772159605162582,
+    "pdr": 0.0,
+    "link_available": true
+  },
+  {
+    "time": 5.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.768703881136329,
+    "pdr": 0.994958,
+    "link_available": true
+  },
+  {
+    "time": 6.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.7655817212052747,
+    "pdr": 0.24572100000000008,
+    "link_available": true
+  },
+  {
+    "time": 7.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.7627964610103697,
+    "pdr": 0.990969,
+    "link_available": true
+  },
+  {
+    "time": 8.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.7603481005516155,
+    "pdr": 0.0008929999999999216,
+    "link_available": true
+  },
+  {
+    "time": 9.0,
+    "satellite": "STARLINK-35574",
+    "delay_ms": 3.7582366398290112,
+    "pdr": 0.0011090000000000266,
+    "link_available": false
+  },
+  {
+    "time": 9.04571,
+    "satellite": "STARLINK-30481",
+    "delay_ms": 4.239769767657063,
+    "pdr": 0.999999999555164,
+    "link_available": true
+  },
+  {
+    "time": 10.0,
+    "satellite": "STARLINK-30481",
+    "delay_ms": 4.237481517964004,
+    "pdr": 1.0,
+    "link_available": true
+  },
+  {
+    "time": 11.0,
+    "satellite": "STARLINK-30481",
+    "delay_ms": 4.235450112624247,
+    "pdr": 1.0,
+    "link_available": true
+  },
+  {
+    "time": 12.0,
+    "satellite": "STARLINK-30481",
+    "delay_ms": 4.233678887278745,
+    "pdr": 0.999995,
+    "link_available": true
+  },
+  {
+    "time": 13.0,
+    "satellite": "STARLINK-30481",
+    "delay_ms": 4.23217117756845,
+    "pdr": 1.0,
+    "link_available": true
+  },
+  {
+    "time": 14.0,
+    "satellite": "STARLINK-30481",
+    "delay_ms": 4.230926983493361,
+    "pdr": 1.0,
+    "link_available": true
+  }
+]

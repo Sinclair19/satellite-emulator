@@ -51,9 +51,8 @@ originates the payload, route it into the terminal's tunnel on that host.
    is unavailable, use an explicitly recorded experiment value, such as 1 for a
    propagation-only run. Preserve handover timestamps independently of any
    averaging window used for channel measurements.
-3. If execution records bracket an interruption, emit its start and end. If
-   the log gives only a switch instant, use that as the switch start and supply
-   a named experiment parameter for the gap duration. A zero gap produces a
+3. If execution records bracket an interruption, emit its start and end. For a completion-only log,
+   supply an explicit gap duration ending at that timestamp. A zero gap produces a
    direct satellite/profile update. Record the run, UE, time origin, and any
    assumed values alongside the trace. The upstream single-satellite converter
    supplies channel samples. Assembling a multi-satellite timeline is a
@@ -122,7 +121,5 @@ the added delay returns to zero. The 80 ms is a fixture parameter.
 | freeRANUE | Establish NR-DC and drive one flow selected for the SN and another for the MN. Observe the gap on the SN flow, continuous MN delivery, and SN recovery with the same UE address and tunnel IDs. Check gNB logs for any unexpected session or path switch. |
 | N3IWF | Establish the tunnel and drive a flow through it to the data network. Capture the outer packets on the terminal/gateway and count the inner packets at the endpoints. For the 80 ms fixture, schedule outside a planned rekey and verify recovery on the same IPsec security associations and PDU session. For longer outages, record actual retransmission or tunnel recovery behavior. |
 
-The implementation deliverables are the ns-3 trace exporter and the
-standalone Go replay controller. The JSON parser, example trace, and
-in-process SN adapter already exist in the companion freeRANUE checkout. The two topology
-tests above exercise the same controller binary and trace.
+The standalone Go controller and the ns-3 exporter are in this branch.
+[Build, deployment and test instructions](running-satlink.md)

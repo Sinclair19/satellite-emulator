@@ -8,11 +8,11 @@ This repository focuses on **control-plane and data-plane behavior under NTN cha
 
 ## Standalone transparent satellite link
 
-This branch hosts the design for a two-port Linux bridge that replays ns-3
-satellite traces between freeRANUE and a ground gNB, or between an N3IWUE
-and a ground N3IWF. The standalone controller and multi-satellite exporter
-are planned. [Design and acceptance tests](docs/satellite-link-simulator.md)
-· [80 ms switch trace](examples/transparent-sn.json)
+The standalone `satlink` controller replays ns-3 satellite traces on a two-port
+Linux bridge for freeRANUE and N3IWF access. The exporter converts one UE's
+channel measurements and executed handovers into a timeline.
+[Build, export and run](docs/running-satlink.md) · [Design](docs/satellite-link-simulator.md)
+· [Measured ns-3 handover trace](examples/ns3-tdcho-ue0.json)
 
 ### Project origins
 
@@ -22,7 +22,8 @@ are planned. [Design and acceptance tests](docs/satellite-link-simulator.md)
   refresh that reference and `git log upstream/master..HEAD` to see local work.
   Git records the original authors. The upstream README has an empty License
   section at this revision.
-- The design and example trace come from the `feat/transparent-ntn-sn` working
+- The controller's trace parser is adapted from `ntn/trace.go`. The design
+  and reference trace come from the `feat/transparent-ntn-sn` working
   tree of freeRANUE, at `docs/satellite-link-simulator.md` and
   `config/ntn/transparent-sn.json`. The design's cross-references have been
   adapted for this checkout. [freeRANUE repository](https://github.com/yummycoder/free-ran-ue)
