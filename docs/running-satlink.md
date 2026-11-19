@@ -23,6 +23,9 @@ namespace that owns the ports.
 
 ## Wire the middle node
 
+On FABRIC, use the slice network names to identify the two Linux data ports.
+[FABRIC topology, NIC selection and replay](fabric.md)
+
 Provide two dedicated Ethernet interfaces or VLAN interfaces on the same Linux
 bridge. Both endpoint hosts use their existing IP addresses on that segment.
 For example, on an unconfigured lab node whose data ports are named
