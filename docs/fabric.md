@@ -48,7 +48,7 @@ examples below assume the notebook printed `ens7` for the terminal side and
 
 ## Install and connect the bridge
 
-For a precompiled controller, copy the matching Actions ZIP to the simulator
+For a precompiled controller, copy the matching release ZIP to the simulator
 VM and extract it under `~/satlink-run`. Run `chmod +x ~/satlink-run/satlink`,
 then continue with the NIC setup below. [Download a Linux binary](running-satlink.md#download-a-linux-binary)
 

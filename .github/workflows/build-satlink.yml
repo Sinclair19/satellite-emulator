@@ -3,6 +3,7 @@ name: Build satlink
 on:
   push:
     branches: [master]
+    tags: ['v[0-9]+.[0-9]+.[0-9]+']
   workflow_dispatch:
 
 permissions:
@@ -53,3 +54,49 @@ jobs:
           name: satlink-linux-${{ matrix.arch }}
           path: ${{ runner.temp }}/satlink-bundle/
           if-no-files-found: error
+
+  release:
+    name: Publish Linux ZIPs
+    needs: build
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: write
+    concurrency: release-${{ github.ref }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Download and verify this run's original ZIPs
+        run: |
+          gh api "repos/$GH_REPO/actions/runs/$GITHUB_RUN_ID/artifacts" > artifacts.json
+          for arch in amd64 arm64; do
+            name="satlink-linux-$arch"
+            artifact=$(jq -cer --arg name "$name" \
+              '.artifacts | map(select(.name == $name and (.expired | not))) | max_by(.id) // error("missing " + $name)' artifacts.json)
+            id=$(jq -r .id <<< "$artifact")
+            digest=$(jq -er '.digest | sub("^sha256:"; "")' <<< "$artifact")
+            gh api "repos/$GH_REPO/actions/artifacts/$id/zip" > "$name.zip"
+            echo "$digest  $name.zip" | sha256sum --check
+          done
+
+      - name: Attach both ZIPs and publish
+        run: |
+          tag="$GITHUB_REF_NAME"
+          if ! gh release view "$tag" --json isDraft,assets > release.json; then
+            gh release create "$tag" --draft --verify-tag --title "satlink $tag" --generate-notes \
+              --notes "Download the ZIP for your Linux architecture. Each includes satlink, two example traces, and license files."
+            gh release view "$tag" --json isDraft,assets > release.json
+          fi
+          if jq -e '.isDraft' release.json > /dev/null; then
+            gh release upload "$tag" satlink-linux-{amd64,arm64}.zip --clobber
+            gh release edit "$tag" --draft=false
+          else
+            # A retry can arrive after GitHub already published the release.
+            for asset in satlink-linux-{amd64,arm64}.zip; do
+              if ! jq -e --arg name "$asset" 'any(.assets[]; .name == $name and .state == "uploaded")' release.json > /dev/null; then
+                gh release upload "$tag" "$asset"
+              fi
+            done
+          fi

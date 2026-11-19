@@ -11,7 +11,7 @@ This repository focuses on **control-plane and data-plane behavior under NTN cha
 The standalone `satlink` controller replays ns-3 satellite traces on a two-port
 Linux bridge for freeRANUE and N3IWF access. The exporter converts one UE's
 channel measurements and executed handovers into a timeline.
-[Download a Linux binary](docs/running-satlink.md#download-a-linux-binary) · [FABRIC deployment](docs/fabric.md) · [Build, export and run](docs/running-satlink.md) · [Design](docs/satellite-link-simulator.md)
+[Download a Linux binary](https://github.com/Sinclair19/satellite-emulator/releases/latest) · [FABRIC deployment](docs/fabric.md) · [Build, export and run](docs/running-satlink.md) · [Design](docs/satellite-link-simulator.md)
 · [Measured ns-3 handover trace](examples/ns3-tdcho-ue0.json)
 
 ### Project origins

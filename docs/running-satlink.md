@@ -7,12 +7,14 @@ N3IWF traffic including IKE, ESP and UDP-encapsulated ESP.
 
 ## Download a Linux binary
 
-Open a successful **Build satlink** run for the commit you want. Under
-**Artifacts**, download the ZIP matching the simulator node’s `uname -m`:
-`satlink-linux-amd64` for `x86_64` or `satlink-linux-arm64` for `aarch64`.
-Each ZIP contains the static Linux executable, both example traces, and license files.
-GitHub Actions builds them on each push to `master`, and **Run workflow** starts
-a fresh build on demand. [Build satlink runs](https://github.com/Sinclair19/satellite-emulator/actions/workflows/build-satlink.yml)
+Download the ZIP matching the simulator node's `uname -m` from the release's
+**Assets** section. Use `satlink-linux-amd64.zip` for `x86_64` or
+`satlink-linux-arm64.zip` for `aarch64`. Each ZIP contains the static Linux
+executable, both example traces, and license files. [Latest release](https://github.com/Sinclair19/satellite-emulator/releases/latest)
+
+For development builds, each push to `master` also produces downloadable
+Actions artifacts. **Run workflow** starts a build on demand.
+[Build satlink runs](https://github.com/Sinclair19/satellite-emulator/actions/workflows/build-satlink.yml)
 
 On the target node, extract the downloaded artifact and restore the executable
 bit. For example, for an x86-64 node:
@@ -27,6 +29,20 @@ chmod +x satlink
 From this directory, use `./satlink` and the bundled trace filenames in replay
 commands. The `bin/satlink` and `examples/...` paths below apply when running
 from a source checkout.
+
+### Publish a version
+
+From the commit you want to release, push an annotated `vMAJOR.MINOR.PATCH`
+tag to the simulator repository. For example, for version 0.1.1:
+
+```sh
+git tag -a v0.1.1 -m "satlink v0.1.1"
+git push origin v0.1.1
+```
+
+Both architecture jobs build and test the tagged source. The release job
+verifies the SHA-256 of each Actions ZIP, attaches both to the release, and
+publishes it with GitHub-generated release notes.
 
 ## Build and check a timeline
 
